@@ -149,4 +149,4 @@ MIT
 
 
    [ycode]: <http://m8s.nsupdate.info/lucky/ycode_v2.1.html>
-   [github]:<http://m8s.nsupdate.info/lucky/ycode_v2.1.html>
+   [github]:<https://github.com/Basiliskin/YCode>
