@@ -6,8 +6,12 @@ Create custom Scan codes,based on image, and use it as Bar/QR Code.
   - Use any image.
   - Android application
   - Cordova Android PLugin
-
-# Generate YCode :
+   
+## Suporting Devices
+    * arm64-v8a
+    * x86_64
+    
+# Generate YCode 
 [Generator][ycode]
 
 ### Server
@@ -22,6 +26,69 @@ Create custom Scan codes,based on image, and use it as Bar/QR Code.
 And of course YCode itself is open source with a [public repository][github]
  on GitHub.
 
+### Usage Android Studio
+1) Create Maven local repository:
+```sh
+mvn install:install-file -Dfile=ycodelib-release.aar -DgroupId=com.ycode -DartifactId=ycode -Dversion=1.0.4 -Dpackaging=aar
+
+mvn install:install-file -Dfile=openCVLibrary310-release.aar -DgroupId=com.opencv -DartifactId=opencv -Dversion=3.1.0 -Dpackaging=aar
+
+```
+2) Create Android Project
+3) Modify build.gradle:
+```sh
+defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 25
+        ...
+}
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+dependencies {
+    ...
+    compile('com.opencv:opencv:3.1.0@aar') {
+        transitive = true
+    }
+    compile('com.ycode:ycode:1.0.4@aar') {
+        transitive = true
+    }
+}
+```
+4) Add java code to handle YCode scanner:
+```sh
+import caragulak.m8s.ycodelib.YCodeActivity;
+
+public class MainActivity extends AppCompatActivity {
+    public final int MY_OP = 11;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        Intent intent = new Intent(MainActivity.this, YCodeActivity.class);
+        intent.putExtra("apiKey", "3794f233c27c237571f14438cff11b7b");
+
+        startActivityForResult(intent, MY_OP);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == MY_OP) {
+            if(resultCode == Activity.RESULT_OK){
+                String result = data.getStringExtra("text");
+                /*
+                Snackbar.make(view, "Replace with your own action:"+result, Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+                        */
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }
+}
+```
 ### Usage Cordova/Ionic [dependencies]
 
 1) Create Maven local repository:
