@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com-ycode-plugins-scanner" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>YCodeCordovaPlugin</name>
+    <js-module name="YCodeCordovaPlugin" src="www/YCodeCordovaPlugin.js">
+        <clobbers target="ycode" />
+    </js-module>
+	
+	<platform name="android">
+	  <config-file target="config.xml" parent="/*">
+		<feature name="YCodeScanner">
+		  <param name="android-package"
+				 value="com.ycode.plugin.YCodeScanner"/>
+		</feature>
+	  </config-file>
+	  <config-file target="AndroidManifest.xml" parent="/manifest/application">
+			<activity android:name="caragulak.m8s.ycodelib.YCodeActivity">
+				<intent-filter>
+				  <category android:name="android.intent.category.LAUNCHER" />
+				</intent-filter>
+			</activity>         
+		</config-file>
+	  <source-file src="src/android/com/ycode/plugin/YCodeScanner.java" target-dir="src/com/ycode/plugin" />
+	  <framework src="src/android/build.gradle" custom="true" type="gradleReference"/>
+	</platform>
+</plugin>

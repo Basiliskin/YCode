@@ -1,0 +1,17 @@
+{
+  "name": "ycode-cordova-plugin",
+  "version": "0.0.1",
+  "description": "YCode Scanner plugin",
+  "cordova": {
+    "id": "com-ycode-plugins-scanner",
+    "platforms": [
+      "android"
+    ]
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Dimitry Katz",
+  "license": "ISC"
+}
